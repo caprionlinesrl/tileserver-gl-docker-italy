@@ -1,7 +1,7 @@
 FROM node:10-buster AS builder
 
 COPY conf /conf
-RUN wget -O /conf/mbtiles/italy.mbtiles https://openmaptiles.os.zhdk.cloud.switch.ch/v3.3/extracts/italy.mbtiles
+RUN wget -O /conf/mbtiles/italy.mbtiles https://ondaplatform.s3.amazonaws.com/maps/maptiler-osm-2017-07-03-v3.6.1-europe_italy.mbtiles
 
 
 FROM maptiler/tileserver-gl:v3.1.1
