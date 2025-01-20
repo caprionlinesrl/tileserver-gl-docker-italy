@@ -1,9 +1,8 @@
-FROM node:23-bookworm AS builder
+FROM eclipse-temurin:21 AS builder
 
-RUN apt-get update && apt-get install -y tilemaker
-RUN wget https://download.geofabrik.de/europe/italy-latest.osm.pbf
-RUN tilemaker --input italy-latest.osm.pbf --output conf/italy.mbtiles
-
+RUN wget https://github.com/onthegomap/planetiler/releases/download/v0.8.3/planetiler.jar
+RUN java -Xmx16G -jar planetiler.jar --area=monaco --download --output=italy.mbtiles
+# COPY italy.mbtiles /conf/mbtiles/italy.mbtiles
 COPY conf /conf
 
 FROM maptiler/tileserver-gl:v5.1.2
